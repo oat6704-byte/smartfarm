@@ -8,6 +8,6 @@
 
 // --- ตั้งค่า Server (ใช้ Local IP ของคอมพิวเตอร์) ---
 // สำคัญ: ต้องเป็น http ไม่ใช่ https
-const char* serverName = "https://192.168.1.111/Web-Dashboard/post-data.php"; 
+const char* serverName = "https://172.24.163.124/Web-Dashboard/post-data.php"; 
 
 #endif

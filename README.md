@@ -1,6 +1,28 @@
-🌿 Smart Farm IoT: Edge Computing & Monitoring Systemระบบฟาร์มอัจฉริยะที่ผสมผสานการทำงานระหว่างอุปกรณ์ IoT และระบบบริหารจัดการผ่านเว็บ โดยมีจุดเด่นด้านการประมวลผลที่อุปกรณ์ (Edge Computing) เพื่อความรวดเร็วและแม่นยำ 📌 ภาพรวมของระบบ (System Overview)โครงงานนี้พัฒนาขึ้นเพื่อจัดการสภาพแวดล้อมในโรงเรือนจำลอง โดยมีระบบการทำงานหลักดังนี้:Automation: ควบคุมปั๊มน้ำอัตโนมัติจากค่าความชื้นดิน และแจ้งเตือนแก๊สรั่วผ่านเสียง Real-time Monitoring: แสดงค่าอุณหภูมิ, ความชื้นอากาศ, ความชื้นดิน และระดับแก๊ส ผ่าน Dashboard Remote Control: สั่งงานเปิด-ปิดไฟจากระยะไกลผ่านหน้าเว็บไซต์ Cloud Notification: แจ้งเตือนสถานะวิกฤตผ่าน Telegram Bot 🏗️ สถาปัตยกรรมของระบบ (System Architecture)Plaintext          +-------------+
-          |    ESP32    | <--- (Sensor: DHT22, Soil, MQ135)
-          | (Edge Logic)| ---> (Actuator: Relay, Buzzer, LED)
+# 🌿 Smart Farm IoT: Edge Computing & Monitoring System
+
+Smart Farm Management System using ESP32 + PHP + MySQL.  
+Monitor environmental data and control farm equipment in real-time with Edge Computing logic.  
+
+---
+
+## 📌 Overview
+
+โปรเจกต์นี้เป็นระบบจัดการฟาร์มอัจฉริยะ (Smart Farm) ที่ช่วยในการตรวจสอบสภาพแวดล้อมและควบคุมอุปกรณ์อัตโนมัติ โดยมีคุณสมบัติหลักดังนี้:
+
+- Edge Computing Logic: ระบบตัดสินใจรดน้ำและแจ้งเตือนแก๊สได้ทันทีที่ตัวอุปกรณ์ แม้ไม่มีอินเทอร์เน็ต  
+- Real-time Dashboard: แสดงค่า อุณหภูมิ, ความชื้นอากาศ, ความชื้นดิน และระดับแก๊ส ผ่าน Gauge Chart  
+- Remote Control: สั่งงานเปิด-ปิดไฟ (LED) ผ่านหน้าเว็บ Dashboard ได้โดยตรง  
+- Data Logging: บันทึกข้อมูลลงฐานข้อมูล MySQL เพื่อดูประวัติย้อนหลัง  
+- Notification:** ระบบแจ้งเตือนผ่าน Telegram เมื่อค่าเซนเซอร์ถึงจุดวิกฤต    
+
+---
+
+## 🏗️ System Architecture
+
+```text
+          +-------------+
+          |   ESP32     | <--- (DHT22, MQ-135, Soil Moisture)
+          |  (Client)   | ---> (Relay, Buzzer, LEDs)
           +------+------+ 
                  |
                  | HTTP POST (with API Key Security)
@@ -16,38 +38,157 @@
           |    MySQL    |
           | (esp32_db)  |
           +-------------+
-✨ คุณสมบัติที่สำคัญ (Features)🌡 Monitoring: แสดงผลด้วย JustGage ที่ทันสมัยและกราฟประวัติข้อมูลล่าสุด 10 รายการ🛡 Security: ระบบตรวจสอบ API Key ก่อนบันทึกข้อมูล และป้องกัน SQL Injection ⚙️ WiFi Manager: ตั้งค่าการเชื่อมต่อ WiFi ผ่านหน้าเว็บ Captive Portal (ไม่ต้องฝังรหัสผ่านในโค้ด) 🔄 Edge Computing: ระบบรดน้ำและแจ้งเตือนแก๊สทำงานได้ทันทีแม้เน็ตหลุด 📱 Notifications: ส่งข้อความแจ้งเตือนเข้ามือถือผ่าน Telegram ทันทีเมื่อค่าผิดปกติ 🛠 รายละเอียดอุปกรณ์และซอฟต์แวร์ (Tech Stack)ส่วนประกอบรายละเอียดMicrocontrollerESP32 (DevKit V1) SensorsDHT22, MQ-135, Soil Moisture Sensor ActuatorsRelay (Water Pump), Active Buzzer BackendPHP 7.4+ / XAMPPDatabaseMySQL (MariaDB) FrontendBootstrap 5, JustGage (JavaScript)📦 ขั้นตอนการติดตั้ง (Installation)1️⃣ การตั้งค่าฐานข้อมูล (Database Setup)นำคำสั่งด้านล่างไปรันใน phpMyAdmin:SQLCREATE DATABASE esp32_db;
-USE esp32_db;
+```
 
--- ตารางเก็บข้อมูลเซนเซอร์
+---
+
+## ✨ Features
+
+- 🌡 Real-time Monitoring: แสดงผลอุณหภูมิและความชื้นด้วย JustGage  
+- 💧 Smart Irrigation: สั่งเปิดปั๊มน้ำอัตโนมัติเมื่อดินแห้ง (ค่า > 3500)  
+- ⚠️ Gas Leak Alert: ระบบแจ้งเตือนด้วยเสียง Buzzer เมื่อพบระดับแก๊สสูงเกินกำหนด 
+- 🌐 Web Control: ปุ่มควบคุม LED ON/OFF พร้อมแสดงสถานะปัจจุบัน  
+- 🛡 Security: ตรวจสอบ API Key ก่อนการรับส่งข้อมูลระหว่าง ESP32 และ Server  
+- 📊 Data History: ตารางแสดงข้อมูลย้อนหลัง 10 รายการล่าสุด  
+- 🗄 MySQL Data Storage  
+
+---
+
+## 📸 Screenshots
+
+### 🟢 Web Dashboard & Control
+![Dashboard](screenshots/dashboard.png)
+*แสดงผลค่าเซนเซอร์แบบ Real-time และปุ่มควบคุม LED *
+
+### 🤖 Physical Model (Diorama)
+![Physical Model](screenshots/model.jpg)
+*โมเดลฟาร์มจำลองที่ประกอบอุปกรณ์ฮาร์ดแวร์เรียบร้อยแล้ว *
+
+### 📱 Telegram Notification
+![Telegram Alert](screenshots/telegram.png)
+*การแจ้งเตือนเมื่อค่าเซนเซอร์ถึงจุดวิกฤต *
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|------------|----------|
+| PHP | Backend Scripting |
+| MySQL | Database Management |
+| Bootstrap 5 | Frontend UI Design |
+| JustGage | Data Visualization (Gauge) |
+| ESP32 | Microcontroller & Sensors |
+| WiFiManager | WiFi Configuration (No hardcode) |
+
+---
+
+## 📦 Installation Guide
+
+### 1️⃣ การตั้งค่าเว็บเซิร์ฟเวอร์ (XAMPP)
+
+```bash
+1.ติดตั้ง XAMPP ไว้ที่ C:\xampp
+2.นำไฟล์ในโฟลเดอร์ Web/ ทั้งหมดไปวางที่ C:\xampp\htdocs\smartfarm\
+3.เปิด XAMPP Control Panel และ Start บริการ Apache และ MySQL
+```
+
+---
+
+### 2️⃣ การตั้งค่าฐานข้อมูล (MySQL Setup)
+#### เข้าหน้า http://localhost/phpmyadmin/ แล้วสร้างฐานข้อมูลชื่อ esp32_db จากนั้นรัน SQL นี้:
+```bash
 CREATE TABLE sensor_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    temperature FLOAT,
-    humidity FLOAT,
-    gas_level INT,
-    soil_moisture INT,
+    temperature FLOAT, humidity FLOAT,
+    gas_level INT, soil_moisture INT,
     relay_status VARCHAR(5),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ตารางควบคุมอุปกรณ์
 CREATE TABLE control_panel (
     id INT PRIMARY KEY,
     status INT DEFAULT 0
 );
 INSERT INTO control_panel (id, status) VALUES (1, 0);
-2️⃣ การตั้งค่าเซิร์ฟเวอร์ (Web Server)นำไฟล์ index.php, post-data.php และ config.php ไปไว้ใน C:\xampp\htdocs\smartfarm\แก้ไขไฟล์ config.php เพื่อตั้งค่ารหัสผ่านฐานข้อมูลให้ตรงกับเครื่องของคุณสำคัญ: ตั้งค่า api_key ในไฟล์ post-data.php ให้ตรงกับในโค้ด ESP32 เพื่อความปลอดภัย3️⃣ การตั้งค่า ESP32 (Firmware)เปิดไฟล์ esp32.ino ด้วย Arduino IDEติดตั้ง Library: WiFiManager, UniversalTelegramBot, DHT sensor libraryแก้ไข serverName ให้เป็น IP ของคอมพิวเตอร์คุณ (เช่น http://192.168.1.50/smartfarm/post-data.php)📁 โครงสร้างโปรเจกต์ (Project Structure)Plaintextsmartfarm-iot/
+```
+---
+
+### 3️⃣ การเตรียม Firmware (ESP32)
+
+#### Create Database
+
+```sql
+1.เปิดไฟล์ esp32.ino ด้วย Arduino IDE
+2.แก้ไข serverName ให้เป็น IP ของคอมพิวเตอร์คุณ (เช่น http://yourserverip/smartfarm/post-data.php)
+3.ทำการคอมไพล์และอัปโหลดโค้ดลงบอร์ด
+```
+
+#### Create Table
+
+```sql
+CREATE TABLE sensor_data (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  temperature FLOAT,
+  humidity FLOAT,
+  distance FLOAT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE device_state (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  fan TINYINT(1) DEFAULT 0,
+  light TINYINT(1) DEFAULT 0,
+  light2 TINYINT(1) DEFAULT 0,
+  mode VARCHAR(20) DEFAULT 'AUTO',
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+             ON UPDATE CURRENT_TIMESTAMP
+);
+INSERT INTO device_control (fan, light, light2, mode)
+VALUES (0, 0, 0, 'AUTO');
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+SmartFarm/
 │
-├── Firmware/
+├── Web-Dashboard/      # ไฟล์ฝั่ง Server
+│   ├── config.php      # ตั้งค่าฐานข้อมูล
+│   ├── index.php       # Dashboard & Control
+│   └── post-data.php   # API รับข้อมูลจาก ESP32
+│
+├── Firmware/           # โค้ดฝั่ง Hardware
 │   └── esp32/
-│       ├── esp32.ino        # โค้ดหลักบนบอร์ด ESP32
-│       └── config.h         # ตั้งค่ารหัสผ่านและ Token ต่างๆ
-│
-├── Web/
-│   ├── config.php           # ตั้งค่าการเชื่อมต่อฐานข้อมูล
-│   ├── index.php            # หน้า Dashboard และปุ่มควบคุม
-│   └── post-data.php        # API รับข้อมูลจาก ESP32
-│
-├── screenshots/             # รูปภาพการทำงานของระบบ
-└── README.md                # เอกสารประกอบโครงงาน
-🔒 หมายเหตุเรื่องความปลอดภัย (Security Notes)User Account Control (UAC): จากการแจ้งเตือนในระบบ แนะนำให้ติดตั้ง XAMPP ไว้ที่ C:\xampp เพื่อหลีกเลี่ยงปัญหา Permission ของ WindowsAPI Key: ระบบจะปฏิเสธข้อมูลทุกประเภทที่ไม่มี API Key ที่ถูกต้องส่งมาด้วย
+│       └── esp32.ino   # โค้ดหลัก ESP32
+│       └── config.h    # ตั่งค่า ESP32
+├── screenshots/        # รูปภาพประกอบ
+└── README.md           # เอกสารฉบับนี้
+```
+
+---
+
+## 🔒 ความปลอดภัยและการตรวจสอบ (Security)
+
+- API Key Authentication: ทุกการส่งข้อมูล POST ต้องมีพารามิเตอร์ api_key ที่ถูกต้อง  
+- SQL Sanitization: ใช้ระบบการกรองข้อมูลก่อนบันทึกเพื่อป้องกัน SQL Injection  
+- Edge Computing Reliability: ระบบถูกออกแบบมาให้ปั๊มน้ำและระบบแจ้งเตือนทำงานได้ "Offline" เสมอ  
+
+---
+
+## 📈 Future Improvements
+
+- Interactive Graphs: เพิ่มกราฟแสดงแนวโน้มย้อนหลังด้วย Chart.js  
+- Manual/Auto Mode: สลับโหมดการทำงานระหว่างอัตโนมัติและสั่งการเองผ่านหน้าเว็บ  
+- Data Export: ระบบส่งออกข้อมูล (Export) เป็นไฟล์ Excel/CSV  
+- Authentication: ระบบ Login สำหรับเข้าถึง Dashboard เพื่อความปลอดภัย  
+- OTA Update: ระบบอัปเดตโค้ด ESP32 ผ่าน WiFi (Over-the-Air)  
+- Solar Powered: พัฒนาชุดจ่ายไฟด้วยระบบโซลาร์เซลล์สำหรับการใช้งานนอกสถานที่
+  
+---
+
+## 👨‍💻 Author
+
+Mini Project – Smart Farm IoT Implementation  
+Developed for academic project submission 🚀
