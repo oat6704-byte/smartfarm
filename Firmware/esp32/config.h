@@ -3,11 +3,11 @@
 #define CONFIG_H
 
 // --- ตั้งค่า Telegram ---
-#define BOT_TOKEN "8341299060:AAEzSW-2JPww2byGpj0RtAWXWdy_CefqvRw" 
-#define CHAT_ID "8453701295" 
+#define BOT_TOKEN "yourBOTTOKEN" 
+#define CHAT_ID "YOURCHATID" 
 
 // --- ตั้งค่า Server (ใช้ Local IP ของคอมพิวเตอร์) ---
 // สำคัญ: ต้องเป็น http ไม่ใช่ https
-const char* serverName = "https://172.24.163.124/Web-Dashboard/post-data.php"; 
+const char* serverName = "https://yourserverIP/Web-Dashboard/post-data.php"; 
 
 #endif
