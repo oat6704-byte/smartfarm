@@ -86,7 +86,7 @@ void loop() {
     // ส่ง Telegram เมื่อค่าถึงจุดวิกฤต [cite: 45]
     if (gasVal > 1500 || soilVal > 3500) {
        String message = "⚠️ แจ้งเตือนสถานะผิดปกติ\n";
-       message += "ความชื้นในดิน: " + String(soilVal) + "\nแก๊ส: " + String(gasVal);
+       message += "ความชื้นในดิน: " + String(soilVal) + "\nแก๊ส: " + String(gasVal) ;
        bot.sendMessage(CHAT_ID, message, "");
     }
 
