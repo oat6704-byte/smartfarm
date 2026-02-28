@@ -58,15 +58,15 @@ Monitor environmental data and control farm equipment in real-time with Edge Com
 
 ### 🟢 Web Dashboard & Control
 ![Dashboard](screenshots/dashboard.png)
-[cite_start]*แสดงผลค่าเซนเซอร์แบบ Real-time และปุ่มควบคุม LED [cite: 43, 44]*
+*แสดงผลค่าเซนเซอร์แบบ Real-time และปุ่มควบคุม LED *
 
 ### 🤖 Physical Model (Diorama)
 ![Physical Model](screenshots/model.jpg)
-[cite_start]*โมเดลฟาร์มจำลองที่ประกอบอุปกรณ์ฮาร์ดแวร์เรียบร้อยแล้ว [cite: 34, 37]*
+*โมเดลฟาร์มจำลองที่ประกอบอุปกรณ์ฮาร์ดแวร์เรียบร้อยแล้ว *
 
 ### 📱 Telegram Notification
 ![Telegram Alert](screenshots/telegram.png)
-[cite_start]*การแจ้งเตือนเมื่อค่าเซนเซอร์ถึงจุดวิกฤต [cite: 45]*
+*การแจ้งเตือนเมื่อค่าเซนเซอร์ถึงจุดวิกฤต *
 
 ---
 
