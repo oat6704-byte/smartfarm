@@ -61,7 +61,7 @@ Monitor environmental data and control farm equipment in real-time with Edge Com
 *แสดงผลค่าเซนเซอร์แบบ Real-time และปุ่มควบคุม LED *
 
 ### 🤖 Physical Model (Diorama)
-![Physical Model](screenshots/model.jpg)
+![Physical Model](screenshots/model.png)
 *โมเดลฟาร์มจำลองที่ประกอบอุปกรณ์ฮาร์ดแวร์เรียบร้อยแล้ว *
 
 ### 📱 Telegram Notification
